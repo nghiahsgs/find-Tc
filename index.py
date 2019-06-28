@@ -57,17 +57,28 @@ def hamVeDothiCatNhauModiTrucX(data_dir,L,nu,plt):
     #plt.show()
 
     #tim Tc_left
+    '''
     temp=np.array(temp)
     x=temp[temp<0.5]
     y1=d[temp<0.5][:,1]
     y2=d[temp<0.5][:,2]
     Tc_left=hamFindGiao2Interpolation(x,y1,y2)
+    '''
+    temp=np.array(temp)
+    x=temp
+    y1=d[:,0]
+    y2=d[:,2]
+    Tc_left=hamFindGiao2Interpolation(x,y1,y2)
     #print(Tc_left)
 
-    x_new=temp[temp<0.5]
+    #x_new=temp[temp<0.5]
+    x_new=temp
     x_new=(x_new-Tc_left)/Tc_left*(L**(1/nu))
-    plt.plot(x_new,d[temp<0.5][:,1],'-')
-    plt.plot(x_new,d[temp<0.5][:,2],'-')
+    
+    #plt.plot(x_new,d[temp<0.5][:,1],'-')
+    #plt.plot(x_new,d[temp<0.5][:,2],'-')
+    plt.plot(x_new,d[:,0],'-')
+    plt.plot(x_new,d[:,2],'-')
 
     #plt.legend(['z','a','q'])
     #plt.legend([L,L])
@@ -81,9 +92,9 @@ nu=float(args[1])
 
 f = plt.figure()
 #doi truc + lap lai voi tat ca cac L khac nhau
-for L in [12,16,24,32,40,48,64]:
+for L in [16,24,32,40,48,56,64]:
     print("L",L)
-    data_dir="/home/nghiahsgs/Desktop/find-Tc/0.2_angle/xacsuat%s.dat"%L
+    data_dir="/home/nghiahsgs/Desktop/find-Tc/1.0_angle/xacsuat%s.dat"%L
     hamVeDothiCatNhauModiTrucX(data_dir,L,nu,plt)
 plt.legend([12,12,16,16,24,24,32,32,40,40,48,48,64,64])
 #plt.show()
